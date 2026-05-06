@@ -96,9 +96,9 @@
       pointer-events: auto;
     }
 
-    nav { transition: opacity .15s ease; will-change: opacity; }
-    body.ipl-form-open nav { opacity: 0; pointer-events: none; visibility: hidden; }
-    body.saya-open nav { opacity: 0; pointer-events: none; visibility: hidden; }
+    #bottomNav { transition: opacity .15s ease; will-change: opacity; }
+    body.ipl-form-open #bottomNav { opacity: 0; pointer-events: none; visibility: hidden; }
+    body.saya-open #bottomNav { opacity: 0; pointer-events: none; visibility: hidden; }
     body { overscroll-behavior-y: none; }
     #overlay { overscroll-behavior: none; }
 
@@ -512,8 +512,8 @@
         background: rgba(248,249,255,0.95) !important;
       }
 
-      /* Hide mobile bottom nav */
-      nav {
+      /* Hide mobile bottom nav only */
+      #bottomNav {
         display: none !important;
       }
 
@@ -553,9 +553,25 @@
         bottom: 0 !important;
       }
 
-      /* Home page padding */
+      /* Home page padding + max width */
       #homePage {
         padding-bottom: 40px !important;
+      }
+
+      /* Constrain content width on desktop */
+      #homePage > *,
+      #homePage .mx-5 {
+        max-width: 860px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+      }
+
+      #homePage .px-5 {
+        max-width: 860px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding-left: 24px;
+        padding-right: 24px;
       }
 
       /* Modals + overlays stay full viewport */
