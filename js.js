@@ -40,7 +40,7 @@ function gasPost_(action, body) {
     let currentSuggestions = [];
 
     // ===== SESSION PERSIST (7 DAYS) =====
-    var SESSION_KEY = 'eni_session';
+    var SESSION_KEY = 'elok_session';
     var SESSION_TTL = 7 * 24 * 60 * 60 * 1000; // 7 hari dalam milliseconds
 
     function saveSession(user) {
@@ -3954,7 +3954,7 @@ function gasPost_(action, body) {
       // 6. Reset greeting
       var nameEl = document.getElementById('homeUsername');
       var greetEl = document.getElementById('homeGreeting');
-      if (nameEl) nameEl.innerText = 'Warga ENI';
+      if (nameEl) nameEl.innerText = 'Warga Elok';
       if (greetEl) {
         var hour = new Date().getHours();
         greetEl.innerText = hour < 11 ? 'Selamat pagi 🌤️' :
@@ -5203,7 +5203,7 @@ function updateHomeGreeting() {
   } else if (currentUser && currentUser.email) {
     nameEl.innerText = currentUser.email.split('@')[0];
   } else {
-    nameEl.innerText = 'Warga ENI';
+    nameEl.innerText = 'Warga Elok';
   }
 }
 
