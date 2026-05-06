@@ -475,12 +475,19 @@
 
     @media (min-width: 768px) {
 
+      /* ── Root: lock horizontal scroll ── */
+      html, body {
+        overflow-x: hidden;
+        height: 100%;
+      }
+
       body {
         background: #EEF0FF;
         font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+        display: flex;
       }
 
-      /* Show sidebar */
+      /* ── Sidebar ── */
       #desktopSidebar {
         display: flex;
         flex-direction: column;
@@ -488,52 +495,77 @@
         left: 0; top: 0; bottom: 0;
         width: 260px;
         background: #ffffff;
-        border-right: 1px solid #e5e7eb;
+        border-right: 1px solid #e8e8f0;
         z-index: 80;
         padding: 28px 20px 24px;
         overflow-y: auto;
+        overflow-x: hidden;
+        flex-shrink: 0;
       }
 
-      /* App shell shifts right */
+      /* ── App shell: everything right of sidebar ── */
       #appShell {
         margin-left: 260px;
-        background: #F8F9FF;
+        width: calc(100vw - 260px);
+        max-width: calc(100vw - 260px);
         min-height: 100vh;
-        box-shadow: none;
-        max-width: none;
+        background: #F8F9FF;
         position: relative;
+        overflow-x: hidden;
+        box-sizing: border-box;
       }
 
-      /* Header shifts right */
+      /* ── Header: confined to app shell area ── */
       header {
         left: 260px !important;
         right: 0 !important;
-        width: auto !important;
+        width: calc(100vw - 260px) !important;
+        max-width: calc(100vw - 260px) !important;
         background: rgba(248,249,255,0.95) !important;
+        box-shadow: 0 1px 0 #e8e8f0 !important;
       }
 
-      /* Hide mobile bottom nav only */
+      /* ── Hide mobile bottom nav ── */
       #bottomNav {
         display: none !important;
       }
 
-      /* Sticky CTA — no bottom nav offset */
-      #stickyCTA {
-        bottom: 24px !important;
+      /* ── Sticky/floating elements ── */
+      #stickyCTA { bottom: 24px !important; left: 260px !important; }
+      #securityBtn { bottom: 28px !important; right: 28px !important; }
+      #toast { bottom: 24px !important; left: 260px !important; }
+
+      /* ── Home page: scrollable column, no h-scroll ── */
+      #homePage {
+        position: relative !important;
+        transform: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        padding-top: 72px !important;
+        padding-bottom: 48px !important;
+        min-height: 100vh;
+        height: auto !important;
+        box-sizing: border-box;
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
       }
 
-      /* Security button — reposition */
-      #securityBtn {
-        bottom: 24px !important;
-        right: 24px !important;
+      /* ── Inner content max-width & centered ── */
+      #homePage > div,
+      #homePage > section {
+        width: 100%;
+        max-width: 880px;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        box-sizing: border-box;
+        padding-left: 32px;
+        padding-right: 32px;
       }
 
-      /* Toast — no bottom nav */
-      #toast {
-        bottom: 24px !important;
-      }
-
-      /* Fixed pages — shift right of sidebar */
+      /* ── Fixed sub-pages: slide in from right of sidebar ── */
       #dashboard,
       #pageSaya,
       #explorePage,
@@ -542,36 +574,25 @@
       #sheet {
         left: 260px !important;
         right: 0 !important;
-        width: auto !important;
-        max-width: none !important;
+        width: calc(100vw - 260px) !important;
+        max-width: calc(100vw - 260px) !important;
         min-width: 0 !important;
         transform: none !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box;
       }
 
-      /* dashboard: bottom no longer clipped by nav */
-      #dashboard {
-        bottom: 0 !important;
-      }
+      #dashboard { bottom: 0 !important; }
 
-      /* Home page padding + max width */
-      #homePage {
-        padding-bottom: 40px !important;
-      }
-
-      /* Constrain content width on desktop */
-      #homePage > *,
-      #homePage .mx-5 {
-        max-width: 860px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-      }
-
-      #homePage .px-5 {
-        max-width: 860px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        padding-left: 24px;
-        padding-right: 24px;
+      /* ── Content inside sub-pages: constrained ── */
+      #dashboard .flex-1,
+      #pageSaya .flex-1,
+      #explorePage .flex-1,
+      #formMudik .flex-1,
+      #formRenovasi .flex-1,
+      #sheet .flex-1 {
+        overflow-x: hidden;
+        max-width: 100%;
       }
 
       /* Modals + overlays stay full viewport */
