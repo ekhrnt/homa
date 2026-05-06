@@ -475,16 +475,11 @@
 
     @media (min-width: 768px) {
 
-      /* ── Root: lock horizontal scroll ── */
-      html, body {
-        overflow-x: hidden;
-        height: 100%;
-      }
+      html { overflow-x: hidden; }
 
       body {
         background: #EEF0FF;
         font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
-        display: flex;
       }
 
       /* ── Sidebar ── */
@@ -496,104 +491,49 @@
         width: 260px;
         background: #ffffff;
         border-right: 1px solid #e8e8f0;
-        z-index: 80;
+        z-index: 70;
         padding: 28px 20px 24px;
         overflow-y: auto;
         overflow-x: hidden;
-        flex-shrink: 0;
       }
 
-      /* ── App shell: everything right of sidebar ── */
+      /* ── App shell background + shift ── */
       #appShell {
         margin-left: 260px;
-        width: calc(100vw - 260px);
-        max-width: calc(100vw - 260px);
-        min-height: 100vh;
         background: #F8F9FF;
+        min-height: 100vh;
         position: relative;
-        overflow-x: hidden;
-        box-sizing: border-box;
       }
 
-      /* ── Header: confined to app shell area ── */
+      /* ── Fixed elements: shift right of sidebar ── */
       header {
         left: 260px !important;
         right: 0 !important;
-        width: calc(100vw - 260px) !important;
-        max-width: calc(100vw - 260px) !important;
         background: rgba(248,249,255,0.95) !important;
-        box-shadow: 0 1px 0 #e8e8f0 !important;
       }
 
-      /* ── Hide mobile bottom nav ── */
       #bottomNav {
         display: none !important;
       }
 
-      /* ── Sticky/floating elements ── */
-      #stickyCTA { bottom: 24px !important; left: 260px !important; }
-      #securityBtn { bottom: 28px !important; right: 28px !important; }
-      #toast { bottom: 24px !important; left: 260px !important; }
-
-      /* ── Home page: scrollable column, no h-scroll ── */
-      #homePage {
-        position: relative !important;
-        transform: none !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
-        padding-top: 72px !important;
-        padding-bottom: 48px !important;
-        min-height: 100vh;
-        height: auto !important;
-        box-sizing: border-box;
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: auto !important;
-      }
-
-      /* ── Inner content max-width & centered ── */
-      #homePage > div,
-      #homePage > section {
-        width: 100%;
-        max-width: 880px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        box-sizing: border-box;
-        padding-left: 32px;
-        padding-right: 32px;
-      }
-
-      /* ── Fixed sub-pages: slide in from right of sidebar ── */
+      /* All fixed full-screen pages shift right */
+      #sheet,
       #dashboard,
       #pageSaya,
       #explorePage,
       #formMudik,
-      #formRenovasi,
-      #sheet {
+      #formRenovasi {
         left: 260px !important;
         right: 0 !important;
-        width: calc(100vw - 260px) !important;
-        max-width: calc(100vw - 260px) !important;
-        min-width: 0 !important;
-        transform: none !important;
-        overflow-x: hidden !important;
-        box-sizing: border-box;
+        /* NO transform override — let .app-page animation work */
+        /* NO width override — let right:0 handle it */
       }
 
       #dashboard { bottom: 0 !important; }
 
-      /* ── Content inside sub-pages: constrained ── */
-      #dashboard .flex-1,
-      #pageSaya .flex-1,
-      #explorePage .flex-1,
-      #formMudik .flex-1,
-      #formRenovasi .flex-1,
-      #sheet .flex-1 {
-        overflow-x: hidden;
-        max-width: 100%;
-      }
+      #stickyCTA { left: 260px !important; bottom: 24px !important; }
+      #securityBtn { right: 24px !important; bottom: 24px !important; }
+      #toast { left: 260px !important; bottom: 24px !important; }
 
       /* Modals + overlays stay full viewport */
       #overlay,
