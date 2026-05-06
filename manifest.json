@@ -1,11 +1,11 @@
 {
-  "name": "JPortal",
-  "short_name": "JPortal",
-  "description": "Portal warga Jade Park Serpong 2",
+  "name": "homa",
+  "short_name": "homa",
+  "description": "Smart living. Stronger community. — Jade Park Serpong 2",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#43A047",
+  "background_color": "#EEF0FF",
+  "theme_color": "#6C63FF",
   "orientation": "portrait",
   "icons": [
     {
