@@ -40,7 +40,7 @@ function gasPost_(action, body) {
     let currentSuggestions = [];
 
     // ===== SESSION PERSIST (7 DAYS) =====
-    var SESSION_KEY = 'elok_session';
+    var SESSION_KEY = 'jps2_session';
     var SESSION_TTL = 7 * 24 * 60 * 60 * 1000; // 7 hari dalam milliseconds
 
     function saveSession(user) {
@@ -3954,7 +3954,7 @@ function gasPost_(action, body) {
       // 6. Reset greeting
       var nameEl = document.getElementById('homeUsername');
       var greetEl = document.getElementById('homeGreeting');
-      if (nameEl) nameEl.innerText = 'Warga Elok';
+      if (nameEl) nameEl.innerText = 'Warga JPS2';
       if (greetEl) {
         var hour = new Date().getHours();
         greetEl.innerText = hour < 11 ? 'Selamat pagi 🌤️' :
@@ -4182,7 +4182,7 @@ function gasPost_(action, body) {
             var nominalFmtWa = 'Rp ' + Number(item.nominal || 0).toLocaleString('id-ID');
 
             var waMsg = 'Halo ' + wargaNama + ',\n\n' +
-              'Saya *' + adminName + '* dari Pengurus Paguyuban Elok - Nusa Indah Residence.\n\n' +
+              'Saya *' + adminName + '* dari Pengurus Paguyuban Jade Park Serpong 2.\n\n' +
               'Kami menerima konfirmasi pembayaran IPL Anda:\n' +
               '- Periode: *' + periode + '*\n' +
               '- Nominal: *' + nominalFmtWa + '*\n\n' +
@@ -5203,7 +5203,7 @@ function updateHomeGreeting() {
   } else if (currentUser && currentUser.email) {
     nameEl.innerText = currentUser.email.split('@')[0];
   } else {
-    nameEl.innerText = 'Warga Elok';
+    nameEl.innerText = 'Warga JPS2';
   }
 }
 
@@ -7366,7 +7366,7 @@ function sharePaymentToWA() {
         'Konfirmasi akan kami sampaikan setelah proses verifikasi selesai.' +
       '</p>' +
 
-      '<p style="font-size:12px;font-weight:700;color:#374151;margin:0 0 4px 0;">Paguyuban Elok - Nusa Indah Residence</p>' +
+      '<p style="font-size:12px;font-weight:700;color:#374151;margin:0 0 4px 0;">Paguyuban Jade Park Serpong 2</p>' +
       '<p style="font-size:11px;color:#d1d5db;margin:0;">Issued by JPortal</p>' +
 
     '</div>';
@@ -7422,7 +7422,7 @@ function fallbackShareWA_(nama, periode, nominal, btn) {
       'Periode: ' + periode + '\n' +
       'Nominal: ' + nominal + '\n' +
       'Status : Menunggu Verifikasi\n\n' +
-      '_Pengurus Paguyuban Elok - Nusa Indah Residence_';
+      '_Pengurus Paguyuban Jade Park Serpong 2_';
     window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
     resetShareBtn_(btn);
     return;

@@ -3,11 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport"  content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-  <title>homa — Elok - Nusa Indah Residence</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Bayar IPL – Jade Park Serpong 2</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -16,12 +12,9 @@
       theme: {
         extend: {
           colors: {
-            primary: '#6C63FF',
+            primary: '#43A047',
             darkbg: '#0B1220',
-            softbg: '#F8F9FF',
-          },
-          fontFamily: {
-            sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            softbg: '#F7F9F7',
           },
         },
       },
@@ -30,73 +23,34 @@
 
 <link rel="stylesheet" href="/style.css">
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#6C63FF">
+<meta name="theme-color" content="#43A047">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="homa">
+<meta name="apple-mobile-web-app-title" content="JPortal">
 <link rel="apple-touch-icon" href="/icons/icon-192.png">
 
   <style>
-    body { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif; }
+  @media (min-width: 768px) {
+    #dashboard,
+    #pageSaya,
+    #explorePage,
+    #formMudik,
+    #formRenovasi,
+    #sheet {
+      left: 50% !important;
+      right: auto !important;
+      -webkit-transform: translateX(-50%) !important;
+      transform: translateX(-50%) !important;
+      width: 960px !important;
+      max-width: 960px !important;
+      min-width: 0 !important;
+    }
+  }
   </style>
 </head>
 
-<body class="bg-softbg text-gray-900">
-
-<!-- ===== DESKTOP SIDEBAR ===== -->
-<div id="desktopSidebar">
-  <!-- Logo -->
-  <div class="flex items-center gap-2.5 mb-8 px-2">
-    <svg width="36" height="36" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="sidebarLogo" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#6C63FF"/>
-          <stop offset="100%" stop-color="#2DD4BF"/>
-        </linearGradient>
-      </defs>
-      <path d="M8 38 L8 24 L30 6 L52 24 L52 38" stroke="url(#sidebarLogo)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M20 52 A18 18 0 0 0 40 52" stroke="url(#sidebarLogo)" stroke-width="7.5" stroke-linecap="round" fill="none"/>
-    </svg>
-    <div>
-      <p class="font-bold text-gray-900 text-lg leading-tight">homa</p>
-      <p class="text-[10px] text-gray-400 leading-tight">Elok - Nusa Indah Residence</p>
-    </div>
-  </div>
-
-  <!-- Nav -->
-  <div class="flex flex-col gap-1 flex-1" id="sidebarNavItems">
-    <button id="sidebarHome" onclick="openHome()" class="sidebar-nav-item active">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M14.9081 16.885H9.09306C8.67906 16.885 8.34306 16.549 8.34306 16.135C8.34306 15.721 8.67906 15.385 9.09306 15.385H14.9081C15.3221 15.385 15.6581 15.721 15.6581 16.135C15.6581 16.549 15.3221 16.885 14.9081 16.885ZM19.2491 6.158C18.8861 5.838 18.4731 5.476 17.9811 5.021C17.7581 4.841 17.5141 4.635 17.2551 4.417C15.7951 3.186 13.7951 1.5 11.9721 1.5C10.1701 1.5 8.29906 3.092 6.79606 4.371C6.51806 4.607 6.25806 4.829 5.99306 5.044C5.52706 5.476 5.11406 5.839 4.75006 6.16C2.36306 8.261 1.91406 8.812 1.91406 13.713C1.91406 22.5 4.45506 22.5 12.0001 22.5C19.5441 22.5 22.0861 22.5 22.0861 13.713C22.0861 8.811 21.6371 8.26 19.2491 6.158Z"/></svg>
-      <span>Beranda</span>
-    </button>
-    <button id="sidebarHistory" onclick="openDashboard()" class="sidebar-nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.5949 12.6875H8.37489C7.96089 12.6875 7.62489 12.3515 7.62489 11.9375C7.62489 11.5235 7.96089 11.1875 8.37489 11.1875H15.5949C16.0089 11.1875 16.3449 11.5235 16.3449 11.9375C16.3449 12.3515 16.0089 12.6875 15.5949 12.6875ZM15.5949 16.4465H8.37489C7.96089 16.4465 7.62489 16.1105 7.62489 15.6965C7.62489 15.2825 7.96089 14.9465 8.37489 14.9465H15.5949C16.0089 14.9465 16.3449 15.2825 16.3449 15.6965C16.3449 16.1105 16.0089 16.4465 15.5949 16.4465ZM8.37489 7.42651H11.1299C11.5439 7.42651 11.8799 7.76251 11.8799 8.17651C11.8799 8.59051 11.5439 8.92651 11.1299 8.92651H8.37489C7.96089 8.92651 7.62489 8.59051 7.62489 8.17651C7.62489 7.76251 7.96089 7.42651 8.37489 7.42651ZM11.9999 2.24951C5.43489 2.24951 3.10889 4.80151 3.10889 12.0005C3.10889 19.1985 5.43489 21.7505 11.9999 21.7505C18.5639 21.7505 20.8909 19.1985 20.8909 12.0005C20.8909 4.80151 18.5639 2.24951 11.9999 2.24951Z"/></svg>
-      <span>Tagihan</span>
-    </button>
-    <button id="sidebarExplore" onclick="openExplore()" class="sidebar-nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.618 9.228L14.201 13.756C14.135 13.968 13.969 14.134 13.758 14.2L9.228 15.618C9.161 15.639 9.094 15.649 9.026 15.649C8.85 15.649 8.677 15.58 8.548 15.451C8.371 15.274 8.306 15.012 8.381 14.772L9.799 10.242C9.865 10.03 10.031 9.865 10.242 9.799L14.772 8.382C15.012 8.305 15.274 8.371 15.451 8.549C15.629 8.727 15.693 8.989 15.618 9.228ZM12 2.25C4.801 2.25 2.25 4.802 2.25 12C2.25 19.198 4.801 21.75 12 21.75C19.199 21.75 21.75 19.198 21.75 12C21.75 4.802 19.199 2.25 12 2.25Z"/></svg>
-      <span>Explore</span>
-    </button>
-    <button id="sidebarMe" onclick="openPageSaya()" class="sidebar-nav-item">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0005 13.8307C8.08752 13.8307 4.65552 16.1327 4.65552 18.7557C4.65552 22.1307 10.1845 22.1307 12.0005 22.1307C13.8165 22.1307 19.3445 22.1307 19.3445 18.7337C19.3445 16.1217 15.9125 13.8307 12.0005 13.8307Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M11.962 11.6423H11.993C14.688 11.6423 16.88 9.45026 16.88 6.75526C16.88 4.06126 14.688 1.86926 11.993 1.86926C9.29805 1.86926 7.10605 4.06126 7.10605 6.75326C7.09705 9.43926 9.27405 11.6323 11.962 11.6423Z"/></svg>
-      <span>Akun</span>
-    </button>
-  </div>
-
-  <!-- CTA Bayar IPL -->
-  <div class="mt-6">
-    <button onclick="openSheet()" class="sidebar-cta">
-      <svg class="w-4 h-4" fill="white" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M16.169 12.3C16.04 12.387 15.895 12.428 15.751 12.428C15.51 12.428 15.273 12.312 15.128 12.097C14.335 10.917 13.419 9.819 12.75 9.194V16.086C12.75 16.5 12.414 16.836 12 16.836C11.586 16.836 11.25 16.5 11.25 16.086V9.187C10.588 9.81 9.669 10.912 8.872 12.097C8.642 12.44 8.177 12.532 7.831 12.3C7.488 12.07 7.397 11.603 7.628 11.26C8.455 10.029 10.538 7.164 12 7.164C13.462 7.164 15.545 10.029 16.372 11.26C16.604 11.603 16.512 12.07 16.169 12.3ZM12 2.25C4.802 2.25 2.25 4.802 2.25 12C2.25 19.198 4.802 21.75 12 21.75C19.198 21.75 21.75 19.198 21.75 12C21.75 4.802 19.198 2.25 12 2.25Z"/></svg>
-      Bayar IPL
-    </button>
-  </div>
-
-  <!-- Footer -->
-  <div class="mt-6 px-2">
-    <p class="text-[10px] text-gray-300 leading-relaxed">Smart living.<br>Stronger community.</p>
-  </div>
-</div>
+<body class="bg-softbg text-gray-900 md:bg-softbg">
 
 <!-- ===== DESKTOP WRAPPER ===== -->
 <div id="appShell"
@@ -107,24 +61,9 @@
      class="fixed inset-0 z-[9999] bg-white flex flex-col items-center justify-center
             transition-opacity duration-500">
 
-  <div class="splash-wordmark flex flex-col items-center gap-4">
-    <!-- Logo -->
-    <svg width="72" height="72" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="splashLogo" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#6C63FF"/>
-          <stop offset="100%" stop-color="#2DD4BF"/>
-        </linearGradient>
-      </defs>
-      <path d="M8 38 L8 24 L30 6 L52 24 L52 38" stroke="url(#splashLogo)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M20 52 A18 18 0 0 0 40 52" stroke="url(#splashLogo)" stroke-width="7.5" stroke-linecap="round" fill="none"/>
-    </svg>
-    <!-- Wordmark -->
-    <div class="text-center">
-      <p class="text-3xl font-bold text-gray-900 tracking-tight">homa</p>
-      <p class="text-xs text-gray-400 mt-1 font-medium">Smart living. Stronger community.</p>
-    </div>
-  </div>
+  <h1 class="splash-wordmark text-4xl font-black text-gray-900 tracking-tight">
+    JPortal
+  </h1>
 
   <div class="splash-dots absolute bottom-16 flex gap-1.5">
     <div class="w-1.5 h-1.5 rounded-full bg-primary animate-bounce" style="animation-delay:0ms"></div>
@@ -141,21 +80,9 @@
          border-b border-gray-100
          px-5 py-2 flex items-center justify-between">
 
-  <div class="flex items-center gap-2.5">
-    <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="headerLogo" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#6C63FF"/>
-          <stop offset="100%" stop-color="#2DD4BF"/>
-        </linearGradient>
-      </defs>
-      <path d="M8 38 L8 24 L30 6 L52 24 L52 38" stroke="url(#headerLogo)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-      <path d="M20 52 A18 18 0 0 0 40 52" stroke="url(#headerLogo)" stroke-width="7.5" stroke-linecap="round" fill="none"/>
-    </svg>
-    <div class="flex flex-col">
-      <span class="font-bold text-gray-900 text-base tracking-tight leading-tight">homa</span>
-      <span class="text-[9px] text-gray-400 font-normal leading-tight">Elok - Nusa Indah Residence</span>
-    </div>
+  <div class="flex flex-col">
+    <span class="font-black text-gray-900 text-lg tracking-tight leading-tight">JPortal</span>
+    <span class="text-[9px] text-gray-400 font-normal tracking-normal leading-tight">Jade Park Serpong 2</span>
   </div>
 
   <div id="headerGreeting" class="hidden">
@@ -180,14 +107,14 @@
   <!-- GREETING -->
   <div class="px-5 pt-3 pb-3">
     <p class="text-xs text-gray-500" id="homeGreeting">Selamat datang 👋</p>
-    <h1 class="text-xl font-bold text-gray-900 mt-0" id="homeUsername">homa</h1>
+    <h1 class="text-xl font-bold text-gray-900 mt-0" id="homeUsername">JPortal</h1>
   </div>
 
   <!-- TUNGGAKAN CARD -->
   <div class="mx-5 mb-4">
     <div id="homeTunggakanCard"
          class="rounded-3xl p-5 text-white relative overflow-hidden cursor-pointer active:scale-[0.98] transition"
-         style="background:linear-gradient(135deg,#6C63FF,#2DD4BF);"
+         style="background:#2E7D32;"
          onclick="openTunggakanDetail()">
 
       <!-- DEKORASI CIRCLE -->
@@ -198,7 +125,7 @@
       <div class="relative z-10">
         <!-- ROW 1: label + badge -->
         <div class="flex justify-between items-center">
-          <p class="text-[11px] text-indigo-200 font-medium tracking-wide">Total Tunggakan</p>
+          <p class="text-[11px] text-green-200 font-medium tracking-wide">Total Tunggakan</p>
           <div id="homeIplBadge"
                class="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white/15 text-white">
             —
@@ -211,7 +138,7 @@
         <!-- ROW 3: nominal besar + lihat detail -->
         <div class="mt-3 flex items-end justify-between">
           <div>
-            <p class="text-[11px] text-indigo-200 mb-0.5">Total tagihan</p>
+            <p class="text-[11px] text-green-200 mb-0.5">Total tagihan</p>
             <p id="homeIplNominal" class="text-3xl font-bold tracking-tight">Memuat...</p>
           </div>
           <div class="flex items-center gap-1 text-white/70 text-xs mb-1">
@@ -245,8 +172,8 @@
       <button onclick="openRekeningInfo()"
               class="flex flex-col items-center gap-2.5 py-3 active:scale-95 transition">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
-             style="background:#EEF0FF;">
-          <svg class="w-6 h-6" fill="#6C63FF" stroke="none" viewBox="0 0 24 24">
+             style="background:#EBF5EB;">
+          <svg class="w-6 h-6" fill="#43A047" stroke="none" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M18.1605 11.8C18.1605 12.214 17.8245 12.55 17.4105 12.55C16.9965 12.55 16.6605 12.214 16.6605 11.8C16.6605 11.386 16.9965 11.05 17.4105 11.05C17.8245 11.05 18.1605 11.386 18.1605 11.8ZM15.4575 11.86C15.4575 12.859 16.2715 13.672 17.2705 13.672H21.7305C21.7725 13.144 21.8005 12.595 21.8005 12C21.8005 11.298 21.7655 10.655 21.7065 10.046H17.2705C16.2715 10.046 15.4575 10.86 15.4575 11.86Z"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6517 8.64094H7.59171C7.17771 8.64094 6.84171 8.30494 6.84171 7.89094C6.84171 7.47694 7.17771 7.14094 7.59171 7.14094H11.6517C12.0657 7.14094 12.4017 7.47694 12.4017 7.89094C12.4017 8.30494 12.0657 8.64094 11.6517 8.64094ZM17.2707 15.1719C15.4437 15.1719 13.9577 13.6859 13.9577 11.8599C13.9577 10.0329 15.4437 8.54594 17.2707 8.54594H21.4807C20.6027 4.49194 17.8097 2.96094 12.0007 2.96094C4.76471 2.96094 2.19971 5.32694 2.19971 11.9999C2.19971 18.6739 4.76471 21.0389 12.0007 21.0389C17.9427 21.0389 20.7307 19.4389 21.5387 15.1719H17.2707Z"/>
           </svg>
@@ -259,8 +186,8 @@
               class="flex flex-col items-center gap-2.5 py-3 active:scale-95 transition"
               style="touch-action:manipulation;-webkit-tap-highlight-color:transparent;">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
-             style="background:#EEF0FF;">
-          <svg class="w-6 h-6" fill="#6C63FF" stroke="none" viewBox="0 0 24 24">
+             style="background:#EBF5EB;">
+          <svg class="w-6 h-6" fill="#43A047" stroke="none" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12.005 9.25H11.996C11.582 9.25 11.246 8.914 11.246 8.5C11.246 8.086 11.582 7.75 11.996 7.75C12.41 7.75 12.751 8.086 12.751 8.5C12.751 8.914 12.419 9.25 12.005 9.25ZM12.75 15.895C12.75 16.309 12.414 16.645 12 16.645C11.586 16.645 11.25 16.309 11.25 15.895V12C11.25 11.586 11.586 11.25 12 11.25C12.414 11.25 12.75 11.586 12.75 12V15.895ZM12 2.25C4.802 2.25 2.25 4.802 2.25 12C2.25 19.198 4.802 21.75 12 21.75C19.198 21.75 21.75 19.198 21.75 12C21.75 4.802 19.198 2.25 12 2.25Z"/>
           </svg>
         </div>
@@ -271,8 +198,8 @@
       <button onclick="openContactModal()"
               class="flex flex-col items-center gap-2.5 py-3 active:scale-95 transition">
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center"
-             style="background:#EEF0FF;">
-          <svg class="w-6 h-6" fill="#6C63FF" stroke="none" viewBox="0 0 24 24">
+             style="background:#EBF5EB;">
+          <svg class="w-6 h-6" fill="#43A047" stroke="none" viewBox="0 0 24 24">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6108 1.75606C14.1978 1.70406 13.8278 2.00706 13.7828 2.41806C13.7368 2.83006 14.0338 3.20006 14.4448 3.24606C17.8218 3.62106 20.4438 6.24106 20.8228 9.61706C20.8658 10.0001 21.1898 10.2831 21.5668 10.2831C21.5948 10.2831 21.6238 10.2811 21.6518 10.2781C22.0628 10.2331 22.3588 9.86106 22.3128 9.44906C21.8558 5.37306 18.6888 2.20906 14.6108 1.75606Z"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M17.2915 9.68765C17.3615 10.0457 17.6755 10.2937 18.0265 10.2937C18.0745 10.2937 18.1225 10.2897 18.1715 10.2807C18.5775 10.2017 18.8435 9.80665 18.7645 9.40065C18.3575 7.31865 16.7505 5.71165 14.6705 5.30765C14.2735 5.22865 13.8705 5.49465 13.7915 5.90165C13.7125 6.30765 13.9785 6.70165 14.3855 6.78065C15.8615 7.06765 17.0035 8.20865 17.2915 9.68765Z"/>
             <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5259 13.8479C14.5279 14.3339 13.6639 14.7559 11.4169 12.5089C9.17088 10.2619 9.59088 9.39886 10.0779 8.39986C10.7829 6.95186 11.0679 5.63486 7.86588 2.99786C7.10088 2.37286 6.27088 2.13286 5.40388 2.30086C3.57088 2.64386 2.27588 4.68386 2.27788 4.68386C1.46588 5.81986 0.353876 9.23586 7.52088 16.4039C12.2349 21.1189 15.3269 22.2499 17.2029 22.2499C18.1789 22.2499 18.8259 21.9439 19.1999 21.6749C19.2199 21.6629 21.2779 20.3879 21.6259 18.5189C21.7879 17.6499 21.5519 16.8229 20.9259 16.0579C18.2899 12.8589 16.9729 13.1429 15.5259 13.8479Z"/>
@@ -293,11 +220,11 @@
           <p class="text-sm font-bold text-gray-900">Info Kas IPL</p>
           <p class="text-xs text-gray-400 mt-0.5">Transparansi keuangan warga</p>
         </div>
-        <div class="flex items-center gap-1.5 bg-indigo-50 px-2.5 py-1 rounded-full">
-          <svg class="w-3 h-3 text-indigo-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <div class="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-full">
+          <svg class="w-3 h-3 text-green-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
             <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
           </svg>
-          <span class="text-[11px] text-indigo-600 font-semibold">Publik</span>
+          <span class="text-[11px] text-green-600 font-semibold">Publik</span>
         </div>
       </div>
 
@@ -329,8 +256,8 @@
         <button onclick="openKasIPL('2025')"
                 class="w-full px-4 py-3.5 flex items-center gap-3 active:bg-gray-50 transition text-left">
           <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-               style="background:#EEF0FF;">
-            <svg class="w-4 h-4" fill="none" stroke="#6C63FF" stroke-width="1.8" viewBox="0 0 24 24">
+               style="background:#F0FDF4;">
+            <svg class="w-4 h-4" fill="none" stroke="#16a34a" stroke-width="1.8" viewBox="0 0 24 24">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
               <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
             </svg>
@@ -394,11 +321,11 @@
       <div class="px-5 pt-4 pb-3 flex items-center justify-between border-b border-gray-50">
         <div>
           <p class="text-sm font-bold text-gray-900">Info Rekening IPL</p>
-          <p class="text-xs text-gray-400 mt-0.5">Elok - Nusa Indah Residence</p>
+          <p class="text-xs text-gray-400 mt-0.5">Jade Park Serpong 2</p>
         </div>
         <div class="flex items-center gap-1.5">
-          <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></div>
-          <span class="text-[11px] text-indigo-600 font-semibold">Active</span>
+          <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+          <span class="text-[11px] text-green-600 font-semibold">Active</span>
         </div>
       </div>
 
@@ -505,11 +432,11 @@
     <div class="px-4 pt-4 pb-3 flex items-center justify-between">
       <div>
         <p class="text-sm font-bold text-gray-900">Info Fasilitas Umum</p>
-        <p class="text-xs text-gray-400 mt-0.5">Elok - Nusa Indah Residence</p>
+        <p class="text-xs text-gray-400 mt-0.5">Jade Park Serpong 2</p>
       </div>
-      <div class="flex items-center gap-1.5 bg-indigo-50 px-2.5 py-1 rounded-full">
-        <div class="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse"></div>
-        <span class="text-[11px] text-indigo-600 font-semibold">Live</span>
+      <div class="flex items-center gap-1.5 bg-green-50 px-2.5 py-1 rounded-full">
+        <div class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+        <span class="text-[11px] text-green-600 font-semibold">Live</span>
       </div>
     </div>
 
@@ -538,7 +465,7 @@
 </div>
 
 <!-- ================= BOTTOM NAV ================= -->
-<nav id="bottomNav" class="fixed bottom-0 left-0 right-0 z-[60]
+<nav class="fixed bottom-0 left-0 right-0 z-[60]
             bg-white border-t border-gray-100
             shadow-[0_-1px_12px_rgba(0,0,0,0.06)]
             px-3 pb-safe">
@@ -578,7 +505,7 @@
              style="width:76px;height:76px;
                     top:50%;left:50%;
                     transform:translate(-50%,-50%);
-                    background:rgba(108,99,255,0.08);
+                    background:rgba(67,160,71,0.08);
                     animation:haloPulse 2.8s ease-in-out infinite;
                     z-index:0;">
         </div>
@@ -589,7 +516,7 @@
                     top:50%;left:50%;
                     transform:translate(-50%,-50%);
                     background:transparent;
-                    border:1px solid rgba(108,99,255,0.35);
+                    border:1px solid rgba(67,160,71,0.35);
                     animation:ringPulse 2.8s ease-in-out infinite 0.3s;
                     z-index:1;">
         </div>
@@ -601,7 +528,7 @@
                     transform:translate(-50%,-50%) rotate(0deg);
                     border:1px solid transparent;
                     background:linear-gradient(#fff,#fff) padding-box,
-                                conic-gradient(from 0deg, rgba(108,99,255,0.8) 0%, transparent 35%, rgba(108,99,255,0.8) 100%) border-box;
+                                conic-gradient(from 0deg, rgba(67,160,71,0.8) 0%, transparent 35%, rgba(67,160,71,0.8) 100%) border-box;
                     animation:orbitSpin 5s linear infinite;
                     z-index:2;">
         </div>
@@ -609,8 +536,8 @@
         <!-- BUTTON UTAMA -->
         <button onclick="openSheet()"
                 class="relative w-[68px] h-[68px] rounded-full flex items-center justify-center active:scale-95 transition-transform"
-                style="background:linear-gradient(135deg, #6C63FF 0%, #2DD4BF 100%);
-                       box-shadow:0 6px 20px rgba(108,99,255,0.55), 0 2px 6px rgba(0,0,0,0.15);
+                style="background:linear-gradient(135deg, #4CAF50, #2E7D32);
+                       box-shadow:0 6px 20px rgba(67,160,71,0.55), 0 2px 6px rgba(0,0,0,0.15);
                        z-index:3;
                        flex-shrink:0;">
           <svg class="w-7 h-7" fill="white" stroke="none" viewBox="0 0 24 24">
@@ -620,7 +547,7 @@
 
       </div>
 
-      <span class="text-[12px] font-bold mt-1.5" style="color:#6C63FF;">Bayar IPL</span>
+      <span class="text-[12px] font-bold mt-1.5" style="color:#43A047;">Bayar IPL</span>
     </div>
 
     <!-- EXPLORE -->
@@ -645,7 +572,7 @@
     </button>
 
   </div>
-
+</nav>
 
 <section id="sheet"
   class="fixed inset-0 z-50
@@ -729,8 +656,8 @@
             class="absolute right-2 top-1/2 -translate-y-1/2
                 w-8 h-8 flex items-center justify-center
                 rounded-full
-                text-gray-400 hover:text-indigo-600
-                active:bg-indigo-50 active:scale-95 transition">
+                text-gray-400 hover:text-green-600
+                active:bg-green-50 active:scale-95 transition">
             <span id="blokSearchIcon">🔍</span>
           </button>
         </div>
@@ -743,7 +670,7 @@
         <!-- SUGGESTION: DATA WARGA (SYSTEM RECOMMENDATION) -->
         <div id="blokSuggestion"
             class="hidden mt-3 rounded-xl border border-green-200
-              bg-indigo-50 px-4 py-4 text-sm">
+              bg-green-50 px-4 py-4 text-sm">
 
           <div class="flex items-start gap-3">
             <!-- CONTENT -->
@@ -1096,7 +1023,7 @@
         </div>
         <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
           <div id="uploadBar"
-              class="h-full bg-indigo-500 transition-all duration-300"
+              class="h-full bg-green-500 transition-all duration-300"
               style="width:0%">
           </div>
         </div>
@@ -1289,8 +1216,8 @@
               onclick="openSheet(); closeTunggakanModal();"
               class="w-full text-white py-3.5 rounded-2xl font-semibold text-sm
                      active:scale-95 transition"
-              style="background: linear-gradient(135deg, #6C63FF, #4338CA);
-                     box-shadow: 0 4px 14px rgba(108,99,255,0.3);">
+              style="background: linear-gradient(135deg, #43A047, #2E7D32);
+                     box-shadow: 0 4px 14px rgba(67,160,71,0.3);">
         Bayar Sekarang
       </button>
     </div>
@@ -1390,7 +1317,7 @@
     <div class="flex-shrink-0 px-5 pt-5 pb-3">
       <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-4"></div>
       <p class="text-base font-bold text-gray-900">Hubungi Pengurus</p>
-      <p class="text-xs text-gray-400 mt-0.5">Elok - Nusa Indah Residence</p>
+      <p class="text-xs text-gray-400 mt-0.5">Jade Park Serpong 2</p>
     </div>
 
     <!-- FREEZE SEARCH -->
@@ -1858,14 +1785,14 @@
 
       <!-- CHECK ICON -->
       <div class="w-13 h-13 rounded-full flex items-center justify-center mb-4"
-           style="background: rgba(108,99,255,0.1); width:52px; height:52px;">
-        <svg class="w-6 h-6" fill="none" stroke="#6C63FF" stroke-width="2.2" viewBox="0 0 24 24">
+           style="background: rgba(67,160,71,0.1); width:52px; height:52px;">
+        <svg class="w-6 h-6" fill="none" stroke="#43A047" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
         </svg>
       </div>
 
       <!-- TITLE -->
-      <p class="text-xs font-semibold uppercase mb-4" style="color:#6C63FF; letter-spacing:0.08em;">
+      <p class="text-xs font-semibold uppercase mb-4" style="color:#43A047; letter-spacing:0.08em;">
         Pembayaran Berhasil Diterima
       </p>
 
@@ -1907,8 +1834,8 @@
       </p>
 
       <!-- SIGNATURE -->
-      <p class="text-xs font-semibold text-gray-500">Paguyuban Elok - Nusa Indah Residence</p>
-      <p class="text-xs text-gray-300 mt-1">Issued by homa</p>
+      <p class="text-xs font-semibold text-gray-500">Paguyuban Jade Park Serpong 2</p>
+      <p class="text-xs text-gray-300 mt-1">Issued by JPortal</p>
 
     </div>
 
@@ -2139,7 +2066,7 @@
     <div class="bg-white px-5 py-3 border-b border-gray-100 flex items-center justify-between">
       <div>
         <h1 class="text-base font-semibold text-gray-900">Masuk</h1>
-        <p class="text-xs text-gray-400 mt-0.5">ke akun warga ENI</p>
+        <p class="text-xs text-gray-400 mt-0.5">ke akun warga JPS2</p>
       </div>
       <button onclick="closePageSaya()"
               class="w-8 h-8 rounded-xl bg-gray-100 flex items-center justify-center active:scale-95 transition">
@@ -2168,7 +2095,7 @@
           <label class="text-[11px] font-semibold text-gray-400 uppercase tracking-widest">Email</label>
           <input id="sayaEmailInput"
                  type="email"
-                 placeholder="emailwargaeni@gmail.com"
+                 placeholder="emailwargajps2@gmail.com"
                  class="mt-1 w-full bg-transparent text-gray-900 text-base
                         border-0 p-0 focus:ring-0 focus:outline-none placeholder:text-gray-300">
         </div>
@@ -2535,8 +2462,8 @@
 
           <!-- NO HP -->
           <div class="px-4 py-3.5 flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0">
-              <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <div class="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
               </svg>
             </div>
@@ -2609,8 +2536,8 @@
         <button onclick="openCreatePINModal()"
                 class="w-full px-4 py-4 flex items-center justify-between active:bg-gray-50 transition">
           <div class="flex items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center">
-              <svg class="w-4 h-4 text-indigo-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+            <div class="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center">
+              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
                 <rect x="3" y="11" width="18" height="11" rx="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
@@ -2778,7 +2705,7 @@
     <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
 
       <div class="px-4 pt-4 pb-3 border-b border-gray-50">
-        <p class="text-sm font-bold text-gray-900">Pedoman Elok - Nusa Indah Residence</p>
+        <p class="text-sm font-bold text-gray-900">Pedoman Jade Park Serpong 2</p>
         <p class="text-xs text-gray-400 mt-0.5">Tap untuk membuka dokumen</p>
       </div>
 
@@ -2798,8 +2725,8 @@
 
         <a href="#" onclick="openPedomanViewer('1R5Z6HvpanZPrPjKUgZkSm9-mpbCOeZhh');return false;"
            class="flex items-center gap-3 px-4 py-3.5 active:bg-gray-50 transition">
-          <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0">
-            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
+          <div class="w-8 h-8 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
+            <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
             </svg>
           </div>
@@ -3187,7 +3114,7 @@
                class="mt-1 flex items-center gap-3 px-4 py-3 rounded-2xl
                       border-2 border-dashed border-gray-200 bg-gray-50
                       cursor-pointer active:scale-95 transition">
-          <div class="w-9 h-9 rounded-xl bg-indigo-50 flex items-center justify-center flex-shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center flex-shrink-0">
             <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-width="1.8"
                  stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
               <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
@@ -3334,7 +3261,7 @@
     <!-- HEADER -->
     <div class="px-5 pt-3 pb-4 border-b border-gray-50">
       <p class="text-base font-bold text-gray-900">Beri Penilaian</p>
-      <p class="text-xs text-gray-400 mt-0.5">Bantu kami meningkatkan layanan homa</p>
+      <p class="text-xs text-gray-400 mt-0.5">Bantu kami meningkatkan layanan JPortal</p>
     </div>
 
     <!-- BODY -->
@@ -3456,13 +3383,13 @@
           <span class="text-2xl font-black text-primary">J</span>
         </div>
         <div>
-          <p class="text-base font-bold text-gray-900">homa</p>
+          <p class="text-base font-bold text-gray-900">JPortal</p>
           <p class="text-xs text-gray-400 mt-0.5">v1.0.0</p>
         </div>
       </div>
 
       <div class="space-y-3 text-sm text-gray-500 leading-relaxed">
-        <p>Portal warga digital Elok - Nusa Indah Residence untuk kemudahan pembayaran dan informasi IPL.</p>
+        <p>Portal warga digital Jade Park Serpong 2 untuk kemudahan pembayaran dan informasi IPL.</p>
         <div class="rounded-2xl bg-gray-50 px-4 py-3 space-y-2">
           <div class="flex justify-between">
             <span class="text-gray-400">Versi</span>
@@ -3474,7 +3401,7 @@
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">Cluster</span>
-            <span class="font-medium text-gray-700">Elok - Nusa Indah Residence</span>
+            <span class="font-medium text-gray-700">Jade Park Serpong 2</span>
           </div>
           <div class="flex justify-between">
             <span class="text-gray-400">Developer</span>
@@ -3530,7 +3457,7 @@
     <div class="flex-shrink-0 px-5 pt-5 pb-3">
       <div class="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-4"></div>
       <p class="text-base font-bold text-gray-900">Security Team</p>
-      <p class="text-xs text-gray-400 mt-0.5">Elok - Nusa Indah Residence</p>
+      <p class="text-xs text-gray-400 mt-0.5">Jade Park Serpong 2</p>
     </div>
 
     <!-- FREEZE SEARCH -->
