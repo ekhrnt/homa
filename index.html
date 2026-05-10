@@ -2226,6 +2226,29 @@ img{display:block;max-width:100%}
   </div>
 </div>
 
+<!-- ============================================================
+     BOTTOM SHEET: KONFIRMASI KELUAR
+============================================================ -->
+<div class="bsheet" id="sh-logout">
+  <div class="bs-handle"></div>
+  <div style="padding:24px 24px 8px;text-align:center">
+    <div style="width:64px;height:64px;border-radius:20px;background:#fee2e2;display:flex;align-items:center;justify-content:center;margin:0 auto 16px">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+    </div>
+    <h3 style="font-size:18px;font-weight:700;color:var(--dk);margin-bottom:8px">Keluar dari Homa?</h3>
+    <p style="font-size:13px;color:var(--tx2);line-height:1.6">Sesi Anda akan dihapus.<br>Anda perlu masuk kembali.</p>
+  </div>
+  <div style="padding:16px 20px 20px;display:flex;gap:12px">
+    <button class="btn btn-s" style="flex:1" onclick="closeSheet()">Batal</button>
+    <button class="btn btn-d" style="flex:1" onclick="confirmLogout()">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      Keluar
+    </button>
+  </div>
+</div>
+
 </div><!-- /app -->
 
 <script>
@@ -2265,12 +2288,22 @@ const DEMO_ACCOUNTS = {
   }
 };
 
-function doMasukBlok() {
-  const blok = ($('inp-blok').value || '').trim().toUpperCase();
-  if (!blok) { toast('Masukkan nomor blok Anda', 'warn'); $('inp-blok').focus(); return; }
+async function doMasukBlok() {
+  const raw = ($('inp-blok').value || '').trim();
+  const blok = raw.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+  if (!blok) { toast('Masukkan nomor blok yang valid (cth: A1)', 'warn'); $('inp-blok').focus(); return; }
+  // Langsung masuk dulu dengan nama sementara
   S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
-  toast('Selamat datang, Blok ' + blok + '!', 'ok');
   enterApp();
+  // Fetch nama & data dari Users sheet by blok (background)
+  try {
+    const r = await API.get('getResidentByBlock', { blok });
+    if (r && r.found && r.nama) {
+      S.user.nama  = r.nama;
+      S.user.email = r.email || '';
+      fillProfile();
+    }
+  } catch(e) { /* fallback 'Warga' tetap tampil */ }
 }
 
 /* Mock data – replace with real API calls */
@@ -2681,7 +2714,11 @@ function changePIN() {
    LOGOUT
 ============================================================ */
 function doLogout() {
-  if (!confirm('Yakin ingin keluar?')) return;
+  openSheet('sh-logout');
+}
+
+function confirmLogout() {
+  closeSheet();
   clearSess();
   S.user = null;
   $('inp-email').value = '';
