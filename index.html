@@ -828,13 +828,65 @@ img{display:block;max-width:100%}
 </div>
 
 <!-- ============================================================
+     SCREEN: MASUK SEBAGAI WARGA (default, tanpa login)
+============================================================ -->
+<div class="screen" id="s-blok">
+  <div class="auth-wrap" style="position:relative;z-index:1">
+    <div style="height:env(safe-area-inset-top,0px)"></div>
+    <div class="auth-top" style="padding-top:48px">
+      <div style="width:72px;height:72px;background:var(--lt);border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--p)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <h2>Selamat Datang</h2>
+      <p>Masukkan nomor blok Anda untuk melanjutkan</p>
+    </div>
+    <div class="field" style="margin-top:8px">
+      <label>Nomor Blok</label>
+      <div class="finput">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        <input type="text" id="inp-blok" placeholder="Contoh: A1, B3, C2..." autocomplete="off" autocapitalize="characters"
+               style="text-transform:uppercase"
+               oninput="this.value=this.value.toUpperCase()"
+               onkeydown="if(event.key==='Enter')doMasukBlok()"/>
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <button class="btn btn-p" id="btn-masuk-blok" onclick="doMasukBlok()">
+        <span class="bt">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Masuk ke Aplikasi
+        </span>
+        <span class="spin"></span>
+      </button>
+    </div>
+    <!-- Divider -->
+    <div style="display:flex;align-items:center;gap:12px;margin:24px 0">
+      <div style="flex:1;height:1px;background:var(--bd)"></div>
+      <span style="font-size:11px;color:var(--tx3);font-weight:500;white-space:nowrap">Punya akun terdaftar?</span>
+      <div style="flex:1;height:1px;background:var(--bd)"></div>
+    </div>
+    <button class="btn btn-o" onclick="showScreen('s-email')" style="font-size:14px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      Masuk dengan Email
+    </button>
+    <p style="text-align:center;font-size:11px;color:var(--tx3);margin-top:16px;line-height:1.7">Login dengan email memberikan akses penuh<br>termasuk riwayat pembayaran & notifikasi</p>
+  </div>
+</div>
+
+<!-- ============================================================
      SCREEN: LOGIN EMAIL
 ============================================================ -->
 <div class="screen" id="s-email">
-  <div class="auth-wrap">
+  <div class="auth-wrap" style="position:relative;z-index:1">
     <div style="height:env(safe-area-inset-top,0px)"></div>
-    <div class="auth-top" style="padding-top:48px">
-      <!-- Icon -->
+    <div class="auth-header">
+      <button class="back-btn" onclick="showScreen('s-blok')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+    </div>
+    <div class="auth-top">
       <div style="width:72px;height:72px;background:var(--lt);border-radius:24px;display:flex;align-items:center;justify-content:center;margin-bottom:20px">
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--p)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
@@ -847,7 +899,8 @@ img{display:block;max-width:100%}
       <label>Email</label>
       <div class="finput">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <input type="email" id="inp-email" placeholder="email@example.com" inputmode="email" autocomplete="email"/>
+        <input type="email" id="inp-email" placeholder="email@example.com" inputmode="email" autocomplete="email"
+               onkeydown="if(event.key==='Enter')doSendOTP()"/>
       </div>
     </div>
     <div style="margin-top:8px">
@@ -855,28 +908,6 @@ img{display:block;max-width:100%}
         <span class="bt">Kirim Kode OTP</span>
         <span class="spin"></span>
       </button>
-    </div>
-    <!-- Demo accounts -->
-    <div style="margin-top:28px">
-      <div style="text-align:center;font-size:11px;font-weight:600;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">— Akun Demo —</div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <button onclick="demoLogin('warga')" style="display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--bd);border-radius:var(--r3);padding:12px 14px;text-align:left;transition:border .2s" onmouseover="this.style.borderColor='var(--p)'" onmouseout="this.style.borderColor='var(--bd)'">
-          <div style="width:36px;height:36px;border-radius:50%;background:var(--gp);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0">B</div>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:600;color:var(--dk)">Budi Santoso</div>
-            <div style="font-size:11px;color:var(--tx3)">Blok A1 · Warga</div>
-          </div>
-          <span style="font-size:11px;background:var(--lt);color:var(--p);padding:4px 10px;border-radius:99px;font-weight:600">Masuk</span>
-        </button>
-        <button onclick="demoLogin('admin')" style="display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--bd);border-radius:var(--r3);padding:12px 14px;text-align:left;transition:border .2s" onmouseover="this.style.borderColor='var(--p)'" onmouseout="this.style.borderColor='var(--bd)'">
-          <div style="width:36px;height:36px;border-radius:50%;background:var(--gd);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0">S</div>
-          <div style="flex:1">
-            <div style="font-size:13px;font-weight:600;color:var(--dk)">Sari Dewi</div>
-            <div style="font-size:11px;color:var(--tx3)">Blok C3 · Admin RT</div>
-          </div>
-          <span style="font-size:11px;background:#EEEEFF;color:var(--p);padding:4px 10px;border-radius:99px;font-weight:600">Admin RT</span>
-        </button>
-      </div>
     </div>
   </div>
 </div>
@@ -2237,10 +2268,33 @@ const DEMO_ACCOUNTS = {
   }
 };
 
-function demoLogin(type) {
-  S.user = { ...DEMO_ACCOUNTS[type] };
-  saveSess(S.user);
-  toast('Masuk sebagai ' + S.user.nama, 'ok');
+async function doMasukBlok() {
+  const blok = ($('inp-blok').value || '').trim().toUpperCase();
+  if (!blok) { toast('Masukkan nomor blok Anda', 'warn'); $('inp-blok').focus(); return; }
+  const btn = $('btn-masuk-blok');
+  btn.classList.add('ld');
+  // Coba ambil data warga dari blok ini via GAS
+  try {
+    const r = await API.get('getResidentByBlock', { blok });
+    if (r && r.success && r.resident) {
+      const res = r.resident;
+      S.user = {
+        nama: res.fullName || res.nama || 'Warga ' + blok,
+        blok: blok,
+        email: res.email || '',
+        tarif: res.tarif || 200000,
+        role: res.role || 'warga',
+        hasPIN: false,
+        isGuest: true
+      };
+    } else {
+      S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
+    }
+  } catch(e) {
+    S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
+  }
+  btn.classList.remove('ld');
+  toast('Selamat datang, Blok ' + blok + '!', 'ok');
   setTimeout(() => enterApp(), 400);
 }
 
@@ -2392,7 +2446,7 @@ window.addEventListener('load', () => {
       S.user = user;
       enterApp();
     } else {
-      showScreen('s-email');
+      showScreen('s-blok');
     }
   }, 2200);
 });
@@ -2655,8 +2709,9 @@ function doLogout() {
   if (!confirm('Yakin ingin keluar?')) return;
   clearSess();
   S.user = null;
-  showScreen('s-email');
   $('inp-email').value = '';
+  $('inp-blok').value = '';
+  showScreen('s-blok');
 }
 
 /* ============================================================
