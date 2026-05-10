@@ -2205,7 +2205,7 @@ img{display:block;max-width:100%}
    CONFIG & STATE
 ============================================================ */
 const CFG = {
-  GAS: 'https://script.google.com/macros/s/YOUR_DEPLOYMENT_ID/exec',
+  GAS: 'https://script.google.com/macros/s/AKfycbwdGtetfgyvZCttZ0o1LjFbn-71mHHVnfPv_icjeFwDE9FCllspzUHmMnYGRuDQj62D1g/exec',
   SHEET_ID: '1tr_MfSYdIA9g8SM4Pbc_L1EH3B41NJ72KakcSg7Z6Ck',
   SESS: 'elok_session',
   TTL: 7 * 24 * 60 * 60 * 1000
@@ -2362,30 +2362,23 @@ function closeSheet() {
 }
 
 /* ============================================================
-   API STUBS
-   Replace delay() calls with real fetch to CFG.GAS
+   API
 ============================================================ */
 const API = {
   async get(action, params = {}) {
-    // TODO: Replace with real GAS fetch
-    // const url = new URL(CFG.GAS);
-    // url.searchParams.set('action', action);
-    // Object.entries(params).forEach(([k,v]) => url.searchParams.set(k, v));
-    // const res = await fetch(url);
-    // return res.json();
-    await delay(800);
-    return { ok: true, data: null };
+    const url = new URL(CFG.GAS);
+    url.searchParams.set('action', action);
+    Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v));
+    const res = await fetch(url.toString());
+    return res.json();
   },
-  async post(action, payload = {}) {
-    // TODO: Replace with real GAS fetch
-    // const res = await fetch(CFG.GAS, {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ action, payload })
-    // });
-    // return res.json();
-    await delay(1000);
-    return { ok: true };
+  async post(action, body = {}) {
+    const res = await fetch(CFG.GAS, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action, ...body })
+    });
+    return res.json();
   }
 };
 
@@ -2461,13 +2454,20 @@ async function doSendOTP() {
   if (!email || !email.includes('@')) { toast('Email tidak valid', 'err'); return; }
   const btn = $('btn-send-otp');
   btn.classList.add('ld');
-  // TODO: API.post('sendOTP', { email })
-  await delay(1200);
+  try {
+    const chk = await API.get('checkEmail', { email });
+    if (!chk.success) { toast(chk.message || 'Email tidak terdaftar', 'err'); btn.classList.remove('ld'); return; }
+    const r = await API.post('requestLoginOTP', { email });
+    if (!r.success) { toast(r.message || 'Gagal mengirim OTP', 'err'); btn.classList.remove('ld'); return; }
+    S._loginEmail = email;
+    $('otp-email-hint').textContent = email;
+    showScreen('s-otp');
+    startOTPTimer();
+    $('otp0').focus();
+  } catch(e) {
+    toast('Gagal terhubung ke server', 'err');
+  }
   btn.classList.remove('ld');
-  $('otp-email-hint').textContent = email;
-  showScreen('s-otp');
-  startOTPTimer();
-  $('otp0').focus();
 }
 
 function otpInput(el, idx) {
@@ -2479,23 +2479,35 @@ function otpInput(el, idx) {
 async function doVerifyOTP() {
   const code = [0,1,2,3,4,5].map(i => $('otp'+i).value).join('');
   if (code.length < 6) { toast('Masukkan 6 digit OTP', 'warn'); return; }
+  const email = S._loginEmail || $('inp-email').value.trim();
   const btn = $('btn-verify-otp');
   btn.classList.add('ld');
-  // TODO: API.post('verifyOTP', { email, code })
-  await delay(1000);
-  btn.classList.remove('ld');
-  // Simulate: check hasPIN
-  const u = MK.user;
-  S.user = u;
-  if (!u.hasPIN) {
-    showScreen('s-pin-setup');
-    S.pinStep = 1;
-    S.pinBuf = '';
-  } else {
-    $('pv-ava').textContent = initial(u.nama);
-    $('pv-name').textContent = u.nama;
-    $('pv-blok').textContent = 'Blok ' + u.blok;
-    showScreen('s-pin-verify');
+  try {
+    const r = await API.post('verifyLoginOTP', { email, otp: code });
+    btn.classList.remove('ld');
+    if (!r.success) { toast(r.message || 'Kode OTP salah atau kadaluarsa', 'err'); return; }
+    const u = r.user;
+    const pinCheck = await API.get('hasPIN', { email: u.email });
+    S.user = {
+      nama: u.fullName || u.nama || '',
+      blok: (u.blocks && u.blocks[0]) || u.blok || '',
+      email: u.email,
+      tarif: u.tarif || 200000,
+      role: u.role || 'warga',
+      hasPIN: !!(pinCheck && pinCheck.hasPIN)
+    };
+    if (!S.user.hasPIN) {
+      S.pinStep = 1; S.pinBuf = ''; S.pinConfirm = '';
+      showScreen('s-pin-setup');
+    } else {
+      $('pv-ava').textContent  = initial(S.user.nama);
+      $('pv-name').textContent = S.user.nama;
+      $('pv-blok').textContent = 'Blok ' + S.user.blok;
+      showScreen('s-pin-verify');
+    }
+  } catch(e) {
+    btn.classList.remove('ld');
+    toast('Gagal terhubung ke server', 'err');
   }
 }
 
@@ -2517,10 +2529,14 @@ function startOTPTimer() {
 }
 
 async function doResendOTP() {
-  // TODO: API.post('sendOTP', { email })
-  await delay(800);
-  toast('Kode OTP baru telah dikirim', 'ok');
-  startOTPTimer();
+  const email = S._loginEmail || $('inp-email').value.trim();
+  try {
+    const r = await API.post('requestLoginOTP', { email });
+    if (r.success) { toast('Kode OTP baru telah dikirim', 'ok'); startOTPTimer(); }
+    else toast(r.message || 'Gagal kirim ulang OTP', 'err');
+  } catch(e) {
+    toast('Gagal terhubung ke server', 'err');
+  }
 }
 
 /* ============================================================
@@ -2579,22 +2595,49 @@ async function doSetupPIN() {
     updDots('dots-setup', 0);
     return;
   }
-  // TODO: API.post('setPin', { pin: hash(S.pinBuf) })
-  await delay(600);
-  toast('PIN berhasil dibuat!', 'ok');
-  saveSess(S.user);
-  enterApp();
+  try {
+    const pinHash = await sha256(S.pinBuf);
+    const r = await API.post('savePIN', { email: S.user.email, pinHash });
+    if (!r.success) { toast(r.message || 'Gagal menyimpan PIN', 'err'); return; }
+    S.user.hasPIN = true;
+    toast('PIN berhasil dibuat!', 'ok');
+    saveSess(S.user);
+    enterApp();
+  } catch(e) {
+    toast('Gagal terhubung ke server', 'err');
+  }
 }
 
 async function doVerifyPIN() {
-  // TODO: API.post('verifyPin', { pin: hash(S.pinBuf) })
-  await delay(600);
-  // Simulate success
-  toast('Selamat datang, ' + S.user.nama.split(' ')[0] + '!', 'ok');
-  saveSess(S.user);
-  S.pinBuf = '';
-  updDots('dots-verify', 0);
-  enterApp();
+  try {
+    const pinHash = await sha256(S.pinBuf);
+    const r = await API.post('verifyPIN', { email: S.user.email, pinHash });
+    if (!r.success) {
+      toast(r.message || 'PIN salah', 'err');
+      S.pinBuf = ''; updDots('dots-verify', 0); return;
+    }
+    const u = r.user;
+    S.user = {
+      nama: u.fullName || u.nama || S.user.nama,
+      blok: (u.blocks && u.blocks[0]) || u.blok || S.user.blok,
+      email: u.email || S.user.email,
+      tarif: u.tarif || 200000,
+      role: u.role || 'warga',
+      hasPIN: true
+    };
+    toast('Selamat datang, ' + S.user.nama.split(' ')[0] + '!', 'ok');
+    saveSess(S.user);
+    S.pinBuf = ''; updDots('dots-verify', 0);
+    enterApp();
+  } catch(e) {
+    toast('Gagal terhubung ke server', 'err');
+    S.pinBuf = ''; updDots('dots-verify', 0);
+  }
+}
+
+async function sha256(str) {
+  const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
 function changePIN() {
