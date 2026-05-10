@@ -2,44 +2,40 @@ const CACHE_NAME = 'homa-v1';
 const STATIC_ASSETS = [
   '/',
   '/index.html',
-  '/style.css',
-  '/js.js',
   '/manifest.json',
   '/icons/icon-192.png',
   '/icons/icon-512.png'
 ];
 
-self.addEventListener('install', function(e) {
+self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(STATIC_ASSETS);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(STATIC_ASSETS).catch(() => {}))
   );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', function(e) {
+self.addEventListener('activate', e => {
   e.waitUntil(
-    caches.keys().then(function(keys) {
-      return Promise.all(
-        keys
-          .filter(function(k) { return k !== CACHE_NAME; })
-          .map(function(k) { return caches.delete(k); })
-      );
-    })
+    caches.keys().then(keys =>
+      Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
+    )
   );
   self.clients.claim();
 });
 
-self.addEventListener('fetch', function(e) {
-  // Skip GAS API calls — selalu fetch live
-  if (e.request.url.includes('script.google.com')) {
+self.addEventListener('fetch', e => {
+  // Always fetch live for GAS API calls
+  if (e.request.url.includes('script.google.com')) return;
+
+  // Network first for HTML, cache first for assets
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request).catch(() => caches.match('/index.html'))
+    );
     return;
   }
 
   e.respondWith(
-    caches.match(e.request).then(function(cached) {
-      return cached || fetch(e.request);
-    })
+    caches.match(e.request).then(cached => cached || fetch(e.request))
   );
 });

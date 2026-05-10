@@ -1,12 +1,14 @@
 {
-  "name": "homa",
-  "short_name": "homa",
-  "description": "Smart living. Stronger community. — Elok - Nusa Indah Residence",
+  "name": "Homa – Elok Nusa Indah Residence",
+  "short_name": "Homa",
+  "description": "Sistem manajemen IPL warga Elok – Nusa Indah Residence",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#EEF0FF",
-  "theme_color": "#6C63FF",
-  "orientation": "portrait",
+  "background_color": "#5B5BD6",
+  "theme_color": "#5B5BD6",
+  "orientation": "portrait-primary",
+  "categories": ["utilities", "finance"],
   "icons": [
     {
       "src": "/icons/icon-192.png",
@@ -20,5 +22,6 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": []
 }
