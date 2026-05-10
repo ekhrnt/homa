@@ -47,14 +47,13 @@ img{display:block;max-width:100%}
 /* ===== SCREENS ===== */
 .screen{
   position:absolute;inset:0;
-  display:none;
+  display:none !important;
   overflow:hidden;
 }
-.screen.active{display:flex;flex-direction:column;}
+.screen.active{display:flex !important;flex-direction:column;}
 /* ===== SPLASH ===== */
 #s-splash{
   background:var(--gp);
-  display:flex;flex-direction:column;
   align-items:center;justify-content:center;
   gap:16px;
 }
