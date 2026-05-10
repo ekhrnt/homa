@@ -47,12 +47,10 @@ img{display:block;max-width:100%}
 /* ===== SCREENS ===== */
 .screen{
   position:absolute;inset:0;
-  opacity:0;pointer-events:none;
-  transition:opacity .3s,transform .3s;
-  transform:translateY(8px);
+  display:none;
   overflow:hidden;
 }
-.screen.active{opacity:1;pointer-events:all;transform:translateY(0)}
+.screen.active{display:flex;flex-direction:column;}
 /* ===== SPLASH ===== */
 #s-splash{
   background:var(--gp);
@@ -2268,34 +2266,12 @@ const DEMO_ACCOUNTS = {
   }
 };
 
-async function doMasukBlok() {
+function doMasukBlok() {
   const blok = ($('inp-blok').value || '').trim().toUpperCase();
   if (!blok) { toast('Masukkan nomor blok Anda', 'warn'); $('inp-blok').focus(); return; }
-  const btn = $('btn-masuk-blok');
-  btn.classList.add('ld');
-  // Coba ambil data warga dari blok ini via GAS
-  try {
-    const r = await API.get('getResidentByBlock', { blok });
-    if (r && r.success && r.resident) {
-      const res = r.resident;
-      S.user = {
-        nama: res.fullName || res.nama || 'Warga ' + blok,
-        blok: blok,
-        email: res.email || '',
-        tarif: res.tarif || 200000,
-        role: res.role || 'warga',
-        hasPIN: false,
-        isGuest: true
-      };
-    } else {
-      S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
-    }
-  } catch(e) {
-    S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
-  }
-  btn.classList.remove('ld');
+  S.user = { nama: 'Warga', blok, email: '', tarif: 200000, role: 'warga', hasPIN: false, isGuest: true };
   toast('Selamat datang, Blok ' + blok + '!', 'ok');
-  setTimeout(() => enterApp(), 400);
+  enterApp();
 }
 
 /* Mock data – replace with real API calls */
